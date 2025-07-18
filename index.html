@@ -24,6 +24,9 @@
       position: absolute;
       transition: opacity 0.5s ease;
       opacity: 0;
+      pointer-events: none; /* ← 加這行 */
+
+
     }
     .carousel img.active {
       opacity: 1;
@@ -63,6 +66,7 @@
     <img src="S__100679688.jpg" />
     <img src="S__100679689.jpg" />
     <img src="S__100679690.jpg" />
+    <img src="S__100679691.jpg" />
 
     <div class="carousel-overlay left" onclick="prevImage()"></div>
     <div class="carousel-overlay right" onclick="nextImage()"></div>
@@ -107,21 +111,21 @@
   <script>
     const images = document.querySelectorAll('.carousel img');
     let current = 0;
-
+  
     function showImage(index) {
-      images[current].classList.remove('active');
+      images.forEach(img => img.classList.remove('active'));
       current = (index + images.length) % images.length;
       images[current].classList.add('active');
     }
-
+  
     function nextImage() {
       showImage(current + 1);
     }
-
+  
     function prevImage() {
       showImage(current - 1);
     }
-
+  
     // 支援手機滑動事件
     let startX = 0;
     document.querySelector('.carousel').addEventListener('touchstart', e => {
@@ -133,5 +137,6 @@
       else if (startX - endX > 50) nextImage();
     });
   </script>
+
 </body>
 </html>
