@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>靜岡咖哩介紹</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fffdf7;
+      color: #333;
+    }
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      overflow: hidden;
+    }
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      transition: opacity 0.5s ease;
+      opacity: 0;
+    }
+    .carousel img.active {
+      opacity: 1;
+      position: relative;
+    }
+    .carousel-overlay {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      top: 0;
+      cursor: pointer;
+    }
+    .left { left: 0; }
+    .right { right: 0; }
+
+    .text-block {
+      padding: 24px;
+      font-size: 1.1em;
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .text-block {
+        font-size: 1em;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carousel">
+    <img src="S__100679685.jpg" class="active" />
+    <img src="S__100679686.jpg" />
+    <img src="S__100679687.jpg" />
+    <img src="S__100679688.jpg" />
+    <img src="S__100679689.jpg" />
+    <img src="S__100679690.jpg" />
+
+    <div class="carousel-overlay left" onclick="prevImage()"></div>
+    <div class="carousel-overlay right" onclick="nextImage()"></div>
+  </div>
+
+  <div class="text-block">
+❤️‍🔥今天帶大家看「靜岡咖哩」～
+🌿唐揚雞咖喱飯💰150
+🌿日式炸蝦🍤（兩隻）💰80
+🌿+溏心蛋💰25
+🌿+起司🧀️20
+
+🔆艷陽短評（卡帶牆好美，炸蝦酥脆🍤）
+（唐揚雞飽滿鮮嫩）❤️‍🔥
+
+🌿這天艷陽來到了位於中壢工業區附近的靜岡咖哩
+店內有一排美美的卡帶牆
+整齊劃一五彩繽紛很是好看
+
+🍤🍛🍤🍛🍤🍛
+艷陽點了一份唐揚雞咖哩飯
+外加兩隻炸蝦！以及起司與溏心蛋
+
+😍端上來滿滿的四大塊唐揚雞
+飽滿多汁！juicy ！juicy ！～
+誠意十足的份量讓人好愛！
+
+🍤炸蝦也是酥酥脆脆的口感
+重點是不！油！不！膩！
+
+🧀️起司也如大家所見份量足足
+雙色相間的灑在咖哩上讓人更有食慾
+不得不說➕料➕這麼多還在200多實在划算
+
+😋喔！真的好喜歡喲～再來去吃好了！
+
+🍴Name：靜岡咖哩
+🍽Where：桃園市中壢區福州二街490號
+🥄Time：週五～週六10:30～14:00、16:30～20:00
+  </div>
+
+  <script>
+    const images = document.querySelectorAll('.carousel img');
+    let current = 0;
+
+    function showImage(index) {
+      images[current].classList.remove('active');
+      current = (index + images.length) % images.length;
+      images[current].classList.add('active');
+    }
+
+    function nextImage() {
+      showImage(current + 1);
+    }
+
+    function prevImage() {
+      showImage(current - 1);
+    }
+
+    // 支援手機滑動事件
+    let startX = 0;
+    document.querySelector('.carousel').addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    });
+    document.querySelector('.carousel').addEventListener('touchend', e => {
+      const endX = e.changedTouches[0].clientX;
+      if (endX - startX > 50) prevImage();
+      else if (startX - endX > 50) nextImage();
+    });
+  </script>
+</body>
+</html>
